@@ -3,6 +3,7 @@
  */
 
 var mongoose = require('mongoose');
+/*
 var blobSchema = new mongoose.Schema({
     _id: String,
     contactperson: String,
@@ -71,4 +72,4 @@ var blobSchema = new mongoose.Schema({
     updatedAt: { type: Date, default: Date.now }
 });
 
-mongoose.model('Blob', blobSchema, 'babysitters');
+mongoose.model('Blob', blobSchema, 'babysitters');*/

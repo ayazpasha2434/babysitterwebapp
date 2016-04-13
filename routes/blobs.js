@@ -123,9 +123,10 @@ router.route('/')
         // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
         var name = req.body.name;
         var address = req.body.address;
-        var phone = req.body.phone;
-        var categories = req.body.categories;
-        var dob = req.body.dob;
+        var mobile = req.body.mobile;
+        var contact = req.body.contact;
+        var city = req.body.city;
+        var YOE = req.body.YOE;
         var dateEnrolled = req.body.dateEnrolled;
         var isVerified = req.body.isVerified;
 
@@ -133,11 +134,12 @@ router.route('/')
         mongoose.model('Blob').create({
             name : name,
             address : address,
-            dob : dob,
+            contact : contact,
+            mobile: mobile,
             isVerified : isVerified,
-            phone : phone,
+            YOE : YOE,
             dateEnrolled : dateEnrolled,
-            categories : categories
+            city : city
         }, function (err, blob) {
             if (err) {
                 res.send("There was a problem adding the information to the database.");

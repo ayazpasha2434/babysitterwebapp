@@ -9,7 +9,7 @@ var express = require('express'),
     methodOverride = require('method-override'); //used to manipulate POST
 
 var db = require('../model/db');
-var blobs = require('../model/babysitter');
+var blobs = require('../model/blobs');
 
 //build the REST operations at the base for babysitter
 //this will be accessible from http://127.0.0.1:3000/babysitter if the default route for / is left unchanged
@@ -22,7 +22,7 @@ router.route('/')
 
         mongoose.model('Blob')
             .find()
-            .select('name categories phone isVerified locality dob year_of_est')
+            .select('name address contact isVerified city YOE mobile')
             .limit(perPage)
             .skip(perPage * page)
             .sort({name: 'asc'})
@@ -123,23 +123,24 @@ router.route('/')
         // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
         var name = req.body.name;
         var address = req.body.address;
-        var phone = req.body.phone;
-        var categories = req.body.categories;
-        var dob = req.body.dob;
-        var dateEnrolled = req.body.dateEnrolled;
+        var contact = req.body.contact;
+        var mobile = req.body.mobile;
+        var YOE = req.body.YOE;
+        var city = req.body.city;
         var isVerified = req.body.isVerified;
 
         //call the create function for our database
         mongoose.model('Blob').create({
             name : name,
             address : address,
-            dob : dob,
+            YOE : YOE,
             isVerified : isVerified,
-            phone : phone,
-            dateEnrolled : dateEnrolled,
-            categories : categories
+            contact : contact,
+            mobile : mobile,
+            city : city
         }, function (err, blob) {
             if (err) {
+                console.log('Error while POST creating new blob: ' + err);
                 res.send("There was a problem adding the information to the database.");
             } else {
                 //Blob has been created
@@ -167,7 +168,7 @@ router.get('/new', function(req, res) {
 });
 
 // route middleware to validate :id
-/*router.param('id', function(req, res, next, id) {
+router.param('id', function(req, res, next, id) {
     //console.log('validating ' + id + ' exists');
     //find the ID in the Database
     mongoose.model('Blob').findById(id, function (err, blob) {
@@ -224,7 +225,6 @@ router.route('/:id')
             }
         });
     });
- */
 //GET the individual blob by Mongo ID
 router.get('/:id/edit', function(req, res) {
     //search for the blob within Mongo
@@ -266,24 +266,24 @@ router.get('/:id/edit', function(req, res) {
 router.post('/:id/edit', function(req, res) {
     // Get our REST or form values. These rely on the "name" attributes
     var name = req.body.name;
-    var phone = req.body.phone;
-    var dob = req.body.dob;
+    var mobile = req.body.mobile;
+    var YOE = req.body.YOE;
     var address = req.body.address;
     var isVerified = req.body.isVerified;
-    var locality = req.body.locality;
-    var categories = req.body.categories;
+    var city = req.body.city;
+    var contact = req.body.contact;
 
     //find the document by ID
     mongoose.model('Blob').findById(req.params.id, function (err, blob) {
         //update it
         blob.update({
             name : name,
-            phone : phone,
-            dob : dob,
+            mobile : mobile,
+            YOE : YOE,
             isVerified : isVerified,
             address : address,
-            locality : locality,
-            categories : categories
+            city : city,
+            contact : contact
         }, function (err, blobID) {
             if (err) {
                 res.send("There was a problem updating the information to the database: " + err);
@@ -621,7 +621,7 @@ function updateBabySitterToMongo(id, params, callback) {
     });
 }
 
-router.get('/importData', function(req, res) {
+/*router.get('/importData', function(req, res) {
 
     var request = require('request');
 
@@ -639,7 +639,8 @@ router.get('/importData', function(req, res) {
 
         require('async').forEach([1,2,3,4,5,6,7,8,9,10], function(item, callb) {
 
-            request('http://t.justdial.com/india_api_read/26june2015/searchziva.php?city='+ city +'&state=&case=spcall&stype=category_list&search=Day%20Care%20Centres&docid=1000687732&rnd1=0.92378&rnd2=0.00741&rnd3=0.48715&basedon=&nearme=&wap=2&login_mobile=&moviedate=2015-10-23&mvbksrc=tp%2Cpvr%2Ccinemax%2Cfc&max=50&pg_no='+item, function(err, response, body) {
+            request('http://t.justdial.com/india_api_read/26june2015/searchziva.php?city='+ city +'&state=&case=spcall&stype=category_list&search=Elderly%20Care&docid=1041767305&lat=&long=&area=&max=20&rnd1=0.86539&rnd2=0.98350&rnd3=0.64942&basedon=&nearme=&wap=2&login_mobile=&moviedate=2015-11-22&mvbksrc=tp%2Cpvr%2Ccinemax%2Cfc&pg_no='+item, function(err, response, body) {
+            //request('http://t.justdial.com/india_api_read/26june2015/searchziva.php?city='+ city +'&state=&case=spcall&stype=category_list&search=Day%20Care%20Centres&docid=1000687732&rnd1=0.92378&rnd2=0.00741&rnd3=0.48715&basedon=&nearme=&wap=2&login_mobile=&moviedate=2015-10-23&mvbksrc=tp%2Cpvr%2Ccinemax%2Cfc&max=50&pg_no='+item, function(err, response, body) {
 
                 if(!err) {
 
@@ -729,6 +730,6 @@ router.get('/importData', function(req, res) {
 
     require('async').forEach(city_list, getBabySitters, finalCallback);
 
-});
+});*/
 
 module.exports = router;

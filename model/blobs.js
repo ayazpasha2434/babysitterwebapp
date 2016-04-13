@@ -3,15 +3,17 @@
  */
 
 var mongoose = require('mongoose');
+
 var blobSchema = new mongoose.Schema({
+    _id: String,
     name: String,
     address: String,
-    categories: String,
+    contact: String,
+    mobile: String,
     isVerified: { type: Boolean, default: false },
-    dob: { type: Date, default: '01/01/1975' },
+    YOE: { type: Date, default: '01/01/1975' },
     dateEnrolled: { type: Date, default: Date.now },
-    phone: String,
-    locality: String
+    city: String
 });
 
 mongoose.model('Blob', blobSchema, 'babysitters');

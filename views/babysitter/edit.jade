@@ -12,21 +12,21 @@ block babysitters
             .col-sm-6
                 textarea#inputAddress.form-control(type='text', name='address' rows=3)= blob.address
         .form-group
-            label.col-sm-2.control-label(for='inputCategories') Categories:
+            label.col-sm-2.control-label(for='inputCategories') Contact:
             .col-sm-6
-                input#inputCategories.form-control(type='text', value='#{blob.categories}', name='categories')
+                input#inputCategories.form-control(type='text', value='#{blob.contact}', name='contact')
         .form-group
-            label.col-sm-2.control-label(for='inputPhone') Phone:
+            label.col-sm-2.control-label(for='inputPhone') Mobile:
             .col-sm-6
-                input#inputPhone.form-control(type='text', value='#{blob.phone}', name='phone')
+                input#inputPhone.form-control(type='text', value='#{blob.mobile}', name='mobile')
         .form-group
-            label.col-sm-2.control-label(for='inputDob') DOB:
+            label.col-sm-2.control-label(for='inputYoe') YOE:
             .col-sm-6
-                input#inputDob.form-control(type='date', name='dob')= blob.dob
+                input#inputYoe.form-control(type='date', name='YOE')= blob.YOE
         .form-group
-            label.col-sm-2.control-label(for='inputLocality') Locality:
+            label.col-sm-2.control-label(for='inputLocality') City:
             .col-sm-6
-                input#inputLocality.form-control(type='locality', value='#{blob.locality}', name='locality')
+                input#inputLocality.form-control(type='text', value='#{blob.city}', name='city')
         .form-group
             label.col-sm-2.control-label(for='inputName') Is Verified?:
             .col-sm-6

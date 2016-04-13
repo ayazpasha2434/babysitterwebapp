@@ -2,7 +2,7 @@
    Created by ayaz on 13/9/15.
 extends layout
 block babysitters
-    form#formAddBlob.form-horizontal(action='/babysitter',method='post',name='addblob',enctype='application/x-www-form-urlencoded')
+    form#formAddBlob.form-horizontal(action='/babysitters',method='post',name='addblob',enctype='application/x-www-form-urlencoded')
         .form-group
             label.col-sm-2.control-label(for='inputName') Name:
             .col-sm-6
@@ -12,21 +12,21 @@ block babysitters
             .col-sm-6
                 textarea#inputAddress.form-control(type='text', placeholder="ex. Street, Locality, City - Pin, State, Country", name='address' rows=3)
         .form-group
-            label.col-sm-2.control-label(for='inputCategories') Categories:
+            label.col-sm-2.control-label(for='inputCategories') Contact:
             .col-sm-6
-                input#inputCategories.form-control(type='text', placeholder="ex. Kindergarten, Day Care, etc", name='categories')
+                input#inputCategories.form-control(type='text', placeholder="ex. +(91)-11-42427627", name='contact')
         .form-group
-            label.col-sm-2.control-label(for='inputPhone') Phone:
+            label.col-sm-2.control-label(for='inputPhone') Mobile:
             .col-sm-6
-                input#inputPhone.form-control(type='text', placeholder="ex. 9988776655", name='phone')
+                input#inputPhone.form-control(type='text', placeholder="ex. +(91)-9990449968, +(91)-9311832314, +(91)-9810344417", name='mobile')
         .form-group
-            label.col-sm-2.control-label(for='inputDob') DOB:
+            label.col-sm-2.control-label(for='inputDob') YOE:
             .col-sm-6
-                input#inputDob.form-control(type='date', placeholder="mm//dd/yyyy", name='dob')
+                input#inputDob.form-control(type='date', placeholder="mm/dd/yyyy", name='yoe')
         .form-group
-            label.col-sm-2.control-label(for='inputLocality') Locality:
+            label.col-sm-2.control-label(for='inputLocality') City:
             .col-sm-6
-                input#inputLocality.form-control(type='locality', placeholder="ex. Basavangudi", name='locality')
+                input#inputLocality.form-control(type='text', placeholder="ex. Bangalore", name='city')
         .form-group
             label.col-sm-2.control-label(for='inputName') Is Verified?:
             .col-sm-6
